@@ -1,0 +1,23 @@
+stages:
+  - 配置校验
+  - DEV配置生效
+
+
+################## 配置校验 阶段 ###############
+配置变更校验:
+  stage: 配置校验
+  plugin: CONFIGURATION-CHECK
+  pluginConfig:
+    appName: demo
+    env: 'DEV'
+
+
+################## 配置同步 阶段 ###############
+DEV配置同步:
+  stage: DEV配置生效
+  plugin: FABRIC-CONFIG-SYNC
+  pluginConfig:
+    appName: demo
+    env: 'DEV'
+    validStep: 'PRE'
+    configTypeList: 'DB'
